@@ -53,3 +53,36 @@ def test_force_within_limit():
     road = Road("dry")
     actual_force = road.limit_tyre_force(1000, 3750)
     assert actual_force == 1000
+
+
+def test_tyre_force_from_slip():
+    road = Road("dry")
+
+    force = road.calculate_tyre_force(
+        slip_ratio=0.05,
+        normal_load=3750
+    )
+
+    assert force == 2000.0
+
+
+def test_tyre_force_respects_friction_limit():
+    road = Road("wet")
+
+    force = road.calculate_tyre_force(
+        slip_ratio=0.2,
+        normal_load=3750
+    )
+
+    assert force == 1875.0
+
+
+def test_invalid_tyre_stiffness():
+    road = Road("dry")
+
+    with pytest.raises(ValueError):
+        road.calculate_tyre_force(
+            slip_ratio=0.05,
+            normal_load=3750,
+            tyre_stiffness=0
+        )
