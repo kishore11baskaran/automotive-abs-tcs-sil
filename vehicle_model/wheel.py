@@ -23,12 +23,11 @@ class Wheel:
 
         if dt <= 0:
             raise ValueError("Time step must be positive")
-
         net_torque = (
-            drive_torque
-            - self.brake_torque
-            - tyre_force * self.radius
-        )
+    drive_torque
+    - self.brake_torque
+    + tyre_force * self.radius
+)
 
         angular_acceleration = net_torque / self.inertia
 
