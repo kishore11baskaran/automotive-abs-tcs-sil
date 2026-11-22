@@ -35,3 +35,4 @@ class Wheel:
         self.angular_velocity += angular_acceleration * dt
 
         self.angular_velocity = max(0.0, self.angular_velocity)
+

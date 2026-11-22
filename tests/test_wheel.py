@@ -1,6 +1,6 @@
 
+import pytest
 from vehicle_model.wheel import Wheel
-
 
 def test_wheel_initialization():
     wheel = Wheel()
@@ -35,3 +35,15 @@ def test_wheel_update():
     )
 
     assert wheel.angular_velocity == 20.0
+
+
+def test_invalid_wheel_radius():
+    with pytest.raises(ValueError):
+        Wheel(radius=0)
+
+
+def test_invalid_wheel_inertia():
+    with pytest.raises(ValueError):
+        Wheel(inertia=0)
+
+    
